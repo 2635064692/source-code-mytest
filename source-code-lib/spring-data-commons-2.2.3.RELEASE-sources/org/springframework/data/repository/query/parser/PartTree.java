@@ -213,8 +213,8 @@ public class PartTree implements Streamable<OrPart> {
 	}
 
 	/**
-	 * Splits the given text at the given keywords. Expects camel-case style to only match concrete keywords and not
-	 * derivatives of it.
+	 * Splits the given text at the given keywords. Expects camel-case style to only match concrete(存在的) keywords and not
+	 * derivatives(衍生物) of it.
 	 *
 	 * @param text the text to split
 	 * @param keyword the keyword to split around
