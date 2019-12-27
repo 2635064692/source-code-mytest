@@ -1,7 +1,7 @@
 server:
-  port: 9000
+  port: 9001
   servlet:
-    context-path: /jpaTest
+    context-path: /feign
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -12,24 +12,24 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        enable_lazy_load_no_trans: true
-        session_factory:
-          statement_inspector: com.zh.jpatest.Inspector.JpaTestInspector
+#    properties:
+#      hibernate:
+#        enable_lazy_load_no_trans: true
+#        session_factory:
+#          statement_inspector: com.zh.jpatest.Inspector.JpaTestInspector
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   application:
-    name: JpaTest
+    name: Feign
 
 eureka:
   client:
     registryFetchIntervalSeconds: 5
-#    healthcheck:
-#      enabled: true
+    #    healthcheck:
+    #      enabled: true
     serviceUrl:
-      defaultZone: http://${eurekaserver.ip}:${eurekaserver.port}/eureka #æ³¨å†Œä¸­å¿ƒ
+      defaultZone: http://${eurekaserver.ip}:${eurekaserver.port}/eureka #×¢²áÖÐÐÄ
   instance:
     prefer-ip-address: true
     hostname: ${spring.application.name}
