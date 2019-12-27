@@ -2,7 +2,7 @@ package com.zh.jpatest;
 
 import com.zh.jpatest.model.entity.Person;
 import com.zh.jpatest.model.entity.RequiredArgsConstructorTestModel;
-import com.zh.jpatest.model.repository.PersonRepository;
+import com.zh.jpatest.model.entity.repository.PersonRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,14 +29,14 @@ class JpatestApplicationTests {
      * RequiredArgsConstructor 注解测试
      */
     @Test
-    void requiredArgsConstructorTest(){
+    void requiredArgsConstructorTest() {
         List<String> stringList = new ArrayList<>();
 
         new RequiredArgsConstructorTestModel(stringList);
     }
 
     @Test
-    void peekTest(){
+    void peekTest() {
         List<String> list = new ArrayList<>();
         list.add("132");
         list.add("135");
@@ -45,7 +45,16 @@ class JpatestApplicationTests {
     }
 
     @Test
-    void findTest(){
+    void findTest() {
         personRepository.findById(1L);
+    }
+
+    @Test
+    void saveAllTest() {
+        Person person = new Person();
+        person.setSex("男");
+        person.setName("zhanghai");
+        person.setAge(123);
+        personRepository.save(person);
     }
 }

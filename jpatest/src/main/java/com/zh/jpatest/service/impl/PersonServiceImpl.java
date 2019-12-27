@@ -1,10 +1,10 @@
-package com.zh.jpatest.model.service.impl;
+package com.zh.jpatest.service.impl;
 
 import com.zh.jpatest.model.entity.Person;
 import com.zh.jpatest.model.protocol.dto.PersonDTO;
 import com.zh.jpatest.model.protocol.vo.PersonVO;
-import com.zh.jpatest.model.repository.PersonRepository;
-import com.zh.jpatest.model.service.PersonService;
+import com.zh.jpatest.model.entity.repository.PersonRepository;
+import com.zh.jpatest.service.PersonService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

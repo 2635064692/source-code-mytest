@@ -1,9 +1,9 @@
-package com.zh.jpatest.model.controller;
+package com.zh.jpatest.controller;
 
 import com.zh.jpatest.model.protocol.ResultModel;
 import com.zh.jpatest.model.protocol.dto.PersonDTO;
 import com.zh.jpatest.model.protocol.vo.PersonVO;
-import com.zh.jpatest.model.service.PersonService;
+import com.zh.jpatest.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;

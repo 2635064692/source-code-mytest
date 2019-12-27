@@ -1,8 +1,13 @@
 package com.zh.jpatest.model.entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author admin_z by 2019/12/13
@@ -11,6 +16,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "PERSON")
+@EntityListeners(AuditingEntityListener.class)
 public class Person {
     private String name;
 
@@ -21,4 +27,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @CreatedDate
+    private Date createTime;
 }

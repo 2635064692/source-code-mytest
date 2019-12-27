@@ -36,7 +36,7 @@ import org.springframework.data.util.ReflectionUtils.AnnotationFieldFilter;
 import org.springframework.util.Assert;
 
 /**
- * Inspects the given {@link Class} for fields annotated by {@link CreatedBy}, {@link CreatedDate},
+ * Inspects(检查) the given {@link Class} for fields annotated by {@link CreatedBy}, {@link CreatedDate},
  * {@link LastModifiedBy} , and {@link LastModifiedDate}. Only one field per annotation is stored.
  *
  * @author Ranie Jade Ramiso
