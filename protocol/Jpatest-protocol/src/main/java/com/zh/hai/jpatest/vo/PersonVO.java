@@ -1,13 +1,14 @@
-package com.zh.jpatest.model.protocol.dto;
+package com.zh.hai.jpatest.vo;
 
 import lombok.Data;
 
 /**
- * @author admin_z by 2019/12/17
- * @ClassName PersonDTO
+ * @author admin_z by 2019/12/27
+ * @ClassName PersonVO
  */
 @Data
-public class PersonDTO {
+public class PersonVO {
+
     private String name;
 
     private Integer age;

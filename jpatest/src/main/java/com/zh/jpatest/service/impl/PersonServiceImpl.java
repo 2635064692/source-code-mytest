@@ -1,8 +1,8 @@
 package com.zh.jpatest.service.impl;
 
+import com.zh.hai.jpatest.dto.PersonDTO;
+import com.zh.hai.jpatest.vo.PersonVO;
 import com.zh.jpatest.model.entity.Person;
-import com.zh.jpatest.model.protocol.dto.PersonDTO;
-import com.zh.jpatest.model.protocol.vo.PersonVO;
 import com.zh.jpatest.model.entity.repository.PersonRepository;
 import com.zh.jpatest.service.PersonService;
 import org.springframework.beans.BeanUtils;

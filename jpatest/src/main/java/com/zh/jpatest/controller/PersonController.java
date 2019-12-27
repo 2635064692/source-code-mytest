@@ -1,19 +1,21 @@
 package com.zh.jpatest.controller;
 
+import com.zh.hai.jpatest.dto.PersonDTO;
+import com.zh.hai.jpatest.vo.PersonVO;
 import com.zh.jpatest.model.protocol.ResultModel;
-import com.zh.jpatest.model.protocol.dto.PersonDTO;
-import com.zh.jpatest.model.protocol.vo.PersonVO;
 import com.zh.jpatest.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author admin_z by 2019/12/17
  * @ClassName PersonController
  */
+@RequestMapping("/person")
 @RestController
 public class PersonController {
     @Autowired

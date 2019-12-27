@@ -1,4 +1,4 @@
-package com.zh.jpatest.service;
+package com.zh.hai.feign.service;
 
 import com.zh.hai.jpatest.dto.PersonDTO;
 import com.zh.hai.jpatest.vo.PersonVO;

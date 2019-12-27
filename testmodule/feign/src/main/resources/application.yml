@@ -29,7 +29,7 @@ eureka:
     #    healthcheck:
     #      enabled: true
     serviceUrl:
-      defaultZone: http://${eurekaserver.ip}:${eurekaserver.port}/eureka #×¢²áÖÐÐÄ
+      defaultZone: http://${eurekaserver.ip}:${eurekaserver.port}/eureka #×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   instance:
     prefer-ip-address: true
     hostname: ${spring.application.name}
