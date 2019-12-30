@@ -23,6 +23,7 @@ spring:
   application:
     name: Feign
 
+
 eureka:
   client:
     registryFetchIntervalSeconds: 5
@@ -41,3 +42,6 @@ eureka:
 eurekaserver:
   ip: localhost
   port: 8080
+feign:
+  hystrix:
+    enabled: true

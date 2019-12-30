@@ -19,7 +19,7 @@ package org.springframework.core.type;
 import java.util.Set;
 
 /**
- * Interface that defines abstract access to the annotations of a specific
+ * Interface that defines(定义) abstract access to(访问) the annotations of a specific
  * class, in a form that does not require that class to be loaded yet.
  *
  * @author Juergen Hoeller

@@ -103,7 +103,7 @@ class FeignClientsRegistrar implements ImportBeanDefinitionRegistrar,
 
 	public void registerFeignClients(AnnotationMetadata metadata,
 			BeanDefinitionRegistry registry) {
-		ClassPathScanningCandidateComponentProvider scanner = getScanner();
+		ClassPathScanningCandidateComponentProvider scanner = getScanner();		//路径扫描
 		scanner.setResourceLoader(this.resourceLoader);
 
 		Set<String> basePackages;
@@ -138,7 +138,7 @@ class FeignClientsRegistrar implements ImportBeanDefinitionRegistrar,
 
 		for (String basePackage : basePackages) {
 			Set<BeanDefinition> candidateComponents = scanner
-					.findCandidateComponents(basePackage);
+					.findCandidateComponents(basePackage); 	//扫描指定路径 组件
 			for (BeanDefinition candidateComponent : candidateComponents) {
 				if (candidateComponent instanceof AnnotatedBeanDefinition) {
 					// verify annotated class is an interface
@@ -367,7 +367,7 @@ class FeignClientsRegistrar implements ImportBeanDefinitionRegistrar,
 
 	private void registerClientConfiguration(BeanDefinitionRegistry registry, Object name,
 			Object configuration) {
-		BeanDefinitionBuilder builder = BeanDefinitionBuilder
+		BeanDefinitionBuilder builder = BeanDefinitionBuilder	//创建一个新得build 用来构造bean的定义
 				.genericBeanDefinition(FeignClientSpecification.class);
 		builder.addConstructorArgValue(name);
 		builder.addConstructorArgValue(configuration);
