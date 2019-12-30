@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../protocol/Jpatest-protocol/Jpatest-protocol.iml" filepath="$PROJECT_DIR$/../protocol/Jpatest-protocol/Jpatest-protocol.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feign/feign.iml" filepath="$PROJECT_DIR$/feign/feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myapp.iml" filepath="$PROJECT_DIR$/myapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/person/person.iml" filepath="$PROJECT_DIR$/person/person.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../protocol/protocol.iml" filepath="$PROJECT_DIR$/../protocol/protocol.iml" />
+    </modules>
+  </component>
+</project>

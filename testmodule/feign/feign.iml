@@ -26,6 +26,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="jpatest-protocol" />
+    <orderEntry type="library" name="Maven: com.zh.hai:Jpatest-protocol:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.10" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.0.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.0.8.RELEASE" level="project" />
