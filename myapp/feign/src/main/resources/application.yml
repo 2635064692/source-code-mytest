@@ -1,0 +1,40 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /feign
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/jpatest?useUnicode=true&characterEncoding=UTF-8&verifyServerCertificate=false&useSSL=false
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  application:
+    name: FeignService
+  main:
+    allow-bean-definition-overriding: true
+
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+#    healthcheck:
+#      enabled: true
+    serviceUrl:
+      defaultZone: http://${eurekaserver.ip}:${eurekaserver.port}/eureka #注册中心
+  instance:
+    prefer-ip-address: true
+    hostname: ${spring.application.name}
+    instance-id: ${eureka.instance.hostname}:${spring.cloud.client.ip-address}:${server.port}
+    lease-expiration-duration-in-seconds: 30
+    leaseRenewalIntervalInSeconds: 10
+#    health-check-url-path: ${server.servlet.context-path}/actuator/health
+
+eurekaserver:
+  ip: localhost
+  port: 8080
