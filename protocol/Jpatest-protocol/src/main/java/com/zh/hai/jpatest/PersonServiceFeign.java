@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author admin_z by 2019/12/27
  * @ClassName JpatestServiceFeign
  */
-@FeignClient(name = "JpaTestService")
-public interface JpatestServiceFeign {
+@FeignClient(name = "PersonService")
+public interface PersonServiceFeign {
     @RequestMapping(value="/person/getPersonById",method= RequestMethod.POST,consumes = "application/json")
     @Headers({"Content-Type: application/json","Accept: application/json"})
     public PersonVO queryPerson(@RequestBody PersonDTO request);
