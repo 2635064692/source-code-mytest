@@ -23,15 +23,15 @@ import org.springframework.core.type.AnnotationMetadata;
 
 /**
  * Interface to be implemented by types that register additional bean definitions when
- * processing @{@link Configuration} classes. Useful when operating at the bean definition
- * level (as opposed to {@code @Bean} method/instance level) is desired or necessary.
+ * processing @{@link Configuration} classes. Useful when operating(操作) at the bean definition
+ * level (as opposed to {@code @Bean} method/instance level) is desired(期望的) or necessary.
  *
  * <p>Along with {@code @Configuration} and {@link ImportSelector}, classes of this type
  * may be provided to the @{@link Import} annotation (or may also be returned from an
  * {@code ImportSelector}).
  *
  * <p>An {@link ImportBeanDefinitionRegistrar} may implement any of the following
- * {@link org.springframework.beans.factory.Aware Aware} interfaces, and their respective
+ * {@link org.springframework.beans.factory.Aware Aware} interfaces, and their respective(各自的)
  * methods will be called prior to {@link #registerBeanDefinitions}:
  * <ul>
  * <li>{@link org.springframework.context.EnvironmentAware EnvironmentAware}</li>
@@ -62,14 +62,14 @@ public interface ImportBeanDefinitionRegistrar {
 
 	/**
 	 * Register bean definitions as necessary based on the given annotation metadata of
-	 * the importing {@code @Configuration} class.
+	 * the importing {@code @Configuration} class. 		根据使用者配置类的注解元数据注册bean定义
 	 * <p>Note that {@link BeanDefinitionRegistryPostProcessor} types may <em>not</em> be
 	 * registered here, due to lifecycle constraints related to {@code @Configuration}
 	 * class processing.
-	 * <p>The default implementation delegates to
+	 * <p>The default implementation delegates(代表) to
 	 * {@link #registerBeanDefinitions(AnnotationMetadata, BeanDefinitionRegistry)}.
-	 * @param importingClassMetadata annotation metadata of the importing class
-	 * @param registry current bean definition registry
+	 * @param importingClassMetadata annotation metadata of the importing class   使用者配置类的注解元数据
+	 * @param registry current bean definition registry		当前bean的定义注册表
 	 * @param importBeanNameGenerator the bean name generator strategy for imported beans:
 	 * {@link ConfigurationClassPostProcessor#IMPORT_BEAN_NAME_GENERATOR} by default, or a
 	 * user-provided one if {@link ConfigurationClassPostProcessor#setBeanNameGenerator}

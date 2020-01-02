@@ -192,7 +192,7 @@ public final class BeanDefinitionBuilder {
 	}
 
 	/**
-	 * Add an indexed constructor arg value. The current index is tracked internally
+	 * Add an indexed constructor arg value. The current index is tracked(追踪) internally     内部追踪当前索引
 	 * and all additions are at the present point.
 	 */
 	public BeanDefinitionBuilder addConstructorArgValue(@Nullable Object value) {

@@ -55,7 +55,7 @@ class FeignClientFactoryBean
 
 	/***********************************
 	 * WARNING! Nothing in this class should be @Autowired. It causes NPEs because of some
-	 * lifecycle race condition.
+	 * lifecycle race竞争 condition(条件).
 	 ***********************************/
 
 	private Class<?> type;
@@ -136,7 +136,7 @@ class FeignClientFactoryBean
 		if (retryer != null) {
 			builder.retryer(retryer);
 		}
-		ErrorDecoder errorDecoder = getOptional(context, ErrorDecoder.class);
+ 		ErrorDecoder errorDecoder = getOptional(context, ErrorDecoder.class);
 		if (errorDecoder != null) {
 			builder.errorDecoder(errorDecoder);
 		}
