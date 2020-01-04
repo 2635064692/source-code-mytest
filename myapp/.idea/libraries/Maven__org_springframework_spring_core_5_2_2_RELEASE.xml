@@ -7,7 +7,7 @@
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.2.2.RELEASE/spring-core-5.2.2.RELEASE-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.2.2.RELEASE/spring-core-5.2.2.RELEASE-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/../source-code-lib/spring-core-5.2.2.RELEASE-sources" />
     </SOURCES>
   </library>
 </component>

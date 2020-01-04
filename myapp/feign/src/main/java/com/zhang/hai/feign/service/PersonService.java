@@ -10,4 +10,5 @@ import com.zh.hai.jpatest.vo.PersonVO;
 public interface PersonService {
     PersonVO getPerson(PersonDTO personDTO);
 
+    PersonVO getPersonByName(PersonDTO personDTO);
 }

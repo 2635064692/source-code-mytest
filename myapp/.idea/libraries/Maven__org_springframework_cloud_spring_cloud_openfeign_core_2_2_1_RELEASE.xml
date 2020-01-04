@@ -7,6 +7,7 @@
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-openfeign-core/2.2.1.RELEASE/spring-cloud-openfeign-core-2.2.1.RELEASE-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
+      <root url="file://$PROJECT_DIR$/../source-code-lib/spring-cloud-openfeign-core-2.2.1.RELEASE-sources" />
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-openfeign-core/2.2.1.RELEASE/spring-cloud-openfeign-core-2.2.1.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
