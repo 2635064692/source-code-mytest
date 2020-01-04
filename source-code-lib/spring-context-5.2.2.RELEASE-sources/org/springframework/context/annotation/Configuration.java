@@ -425,27 +425,27 @@ import org.springframework.stereotype.Component;
 public @interface Configuration {
 
 	/**
-	 * Explicitly specify the name of the Spring bean definition associated with the
-	 * {@code @Configuration} class. If left unspecified (the common case), a bean
-	 * name will be automatically generated.
+	 * Explicitly specify the name of the Spring bean definition associated相关 with the
+	 * {@code @Configuration} class. If left unspecified未指定 (the common case), a bean
+	 * name will be automatically自动 generated.
 	 * <p>The custom name applies only if the {@code @Configuration} class is picked
 	 * up via component scanning or supplied directly to an
 	 * {@link AnnotationConfigApplicationContext}. If the {@code @Configuration} class
-	 * is registered as a traditional XML bean definition, the name/id of the bean
-	 * element will take precedence.
-	 * @return the explicit component name, if any (or empty String otherwise)
+	 * is registered as a traditional传统的 XML bean definition, the name/id of the bean
+	 * element will take precedence优先.
+	 * @return the explicit明确的 component name, if any (or empty String otherwise)
 	 * @see AnnotationBeanNameGenerator
 	 */
-	@AliasFor(annotation = Component.class)
+	@AliasFor(annotation = Component.class)   //@AliasFor注解别名
 	String value() default "";
 
 	/**
 	 * Specify whether {@code @Bean} methods should get proxied in order to enforce
 	 * bean lifecycle behavior, e.g. to return shared singleton bean instances even
-	 * in case of direct {@code @Bean} method calls in user code. This feature
+	 * in case of direct {@code @Bean} method calls in user code. This feature特征
 	 * requires method interception, implemented through a runtime-generated CGLIB
 	 * subclass which comes with limitations such as the configuration class and
-	 * its methods not being allowed to declare {@code final}.
+	 * its methods not being allowed to declare声明 {@code final}.
 	 * <p>The default is {@code true}, allowing for 'inter-bean references' within
 	 * the configuration class as well as for external calls to this configuration's
 	 * {@code @Bean} methods, e.g. from another configuration class. If this is not

@@ -49,7 +49,7 @@ public class ReflectiveFeign extends Feign {
   @SuppressWarnings("unchecked")
   @Override
   public <T> T newInstance(Target<T> target) {
-    Map<String, MethodHandler> nameToHandler = targetToHandlersByName.apply(target);
+    Map<String, MethodHandler> nameToHandler = targetToHandlersByName.apply(target);  //解析方法注解元数据 创建对应的methodhandler 用于代理对象调用
     Map<Method, MethodHandler> methodToHandler = new LinkedHashMap<Method, MethodHandler>();
     List<DefaultMethodHandler> defaultMethodHandlers = new LinkedList<DefaultMethodHandler>();
 
