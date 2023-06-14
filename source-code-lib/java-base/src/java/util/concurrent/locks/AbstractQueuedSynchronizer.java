@@ -794,13 +794,13 @@ public abstract class AbstractQueuedSynchronizer
      */
     private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
         int ws = pred.waitStatus;
-        if (ws == Node.SIGNAL)
+        if (ws == Node.SIGNAL)      //只有设置前驱节点通知状态后，当前线程才能休眠
             /*
              * This node has already set status asking a release
              * to signal it, so it can safely park.
              */
             return true;
-        if (ws > 0) {
+        if (ws > 0) {       //前驱节点放弃等待，去除放弃等待线程（最终由GC回收）
             /*
              * Predecessor was cancelled. Skip over predecessors and
              * indicate retry.
@@ -815,7 +815,7 @@ public abstract class AbstractQueuedSynchronizer
              * need a signal, but don't park yet.  Caller will need to
              * retry to make sure it cannot acquire before parking.
              */
-            compareAndSetWaitStatus(pred, ws, Node.SIGNAL);
+            compareAndSetWaitStatus(pred, ws, Node.SIGNAL);     //设置前驱通知状态（告诉前驱节点能够获取锁后通知）
         }
         return false;
     }
@@ -857,10 +857,10 @@ public abstract class AbstractQueuedSynchronizer
     final boolean acquireQueued(final Node node, int arg) {
         boolean failed = true;
         try {
-            boolean interrupted = false;
+            boolean interrupted = false;    //是否中断标记
             for (;;) {
                 final Node p = node.predecessor();
-                if (p == head && tryAcquire(arg)) {
+                if (p == head && tryAcquire(arg)) { //前一节点为头部节点则说明当前节点可以尝试获取锁
                     setHead(node);
                     p.next = null; // help GC
                     failed = false;
@@ -983,8 +983,8 @@ public abstract class AbstractQueuedSynchronizer
         boolean failed = true;
         try {
             for (;;) {
-                final Node p = node.predecessor();
-                if (p == head) {
+                final Node p = node.predecessor();//获取前一个node节点
+                if (p == head) {    //如果前一节点为头部节点，则说明当前节点可以尝试获取锁（公平锁）
                     int r = tryAcquireShared(arg);
                     if (r >= 0) {
                         setHeadAndPropagate(node, r);
