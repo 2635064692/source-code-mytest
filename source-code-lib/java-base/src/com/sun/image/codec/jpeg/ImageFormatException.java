@@ -39,7 +39,7 @@ class ImageFormatException extends RuntimeException {
      */
     public ImageFormatException() {
         super();
-    }s
+    }
 
     /**
      * Constructs an <code>ImageFormatException</code> with the specified
