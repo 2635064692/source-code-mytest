@@ -448,7 +448,7 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
         } finally {
             takeLock.unlock();
         }
-        if (c == capacity)
+        if (c == capacity)      //是返回-1前的值，怪不得此时未满
             signalNotFull();
         return x;
     }

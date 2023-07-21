@@ -29,7 +29,7 @@ import org.flowable.engine.impl.persistence.entity.ExecutionEntity;
  * 
  * @author Joram Barrez
  */
-public class TriggerExecutionOperation extends AbstractOperation {      //当前节点的触发执行操作，
+public class TriggerExecutionOperation extends AbstractOperation {      //当前节点的触发执行操作，当前仅在任务完成后触发
 
     public TriggerExecutionOperation(CommandContext commandContext, ExecutionEntity execution) {
         super(commandContext, execution);
@@ -44,7 +44,7 @@ public class TriggerExecutionOperation extends AbstractOperation {      //当前
             if (activityBehavior instanceof TriggerableActivityBehavior) {
 
                 if (currentFlowElement instanceof BoundaryEvent) {
-                    commandContext.getHistoryManager().recordActivityStart(execution);
+                    commandContext.getHistoryManager().recordActivityStart(execution);  //事件监听执行
                 }
 
                 ((TriggerableActivityBehavior) activityBehavior).trigger(execution, null, null);

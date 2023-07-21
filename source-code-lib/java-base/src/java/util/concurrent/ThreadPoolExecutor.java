@@ -905,7 +905,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
             int rs = runStateOf(c);
 
             // Check if queue empty only if necessary.
-            if (rs >= SHUTDOWN &&
+            if (rs >= SHUTDOWN &&       //线程池状态异常，非正常运行态
                 ! (rs == SHUTDOWN &&
                    firstTask == null &&
                    ! workQueue.isEmpty()))
@@ -913,7 +913,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 
             for (;;) {
                 int wc = workerCountOf(c);
-                if (wc >= CAPACITY ||
+                if (wc >= CAPACITY ||       //当前工作线程数大于最大
                     wc >= (core ? corePoolSize : maximumPoolSize))
                     return false;
                 if (compareAndIncrementWorkerCount(c))
@@ -1051,8 +1051,8 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
             int rs = runStateOf(c);
 
             // Check if queue empty only if necessary.
-            if (rs >= SHUTDOWN && (rs >= STOP || workQueue.isEmpty())) {       //若为shutdown且队列为空状态，不在接受新任务，计数器归0，核心线程也销毁
-                decrementWorkerCount();                                         //若未stop状态，不在执行新任务，计数器归0，核心线程数销毁
+            if (rs >= SHUTDOWN && (rs >= STOP || workQueue.isEmpty())) {       //若为shutdown且队列为空状态，不在接受新任务，计数器归0，核心线程也销毁（销毁操作已将所有thread中断）
+                decrementWorkerCount();                                         //若未stop状态，不在执行新任务，
                 return null;
             }
 
@@ -1362,8 +1362,8 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
          * thread.  If it fails, we know we are shut down or saturated
          * and so reject the task.
          */
-        int c = ctl.get();      //正在执行的线程计数器
-        if (workerCountOf(c) < corePoolSize) {
+        int c = ctl.get();      //当前线程状态
+        if (workerCountOf(c) < corePoolSize) {        //工作线程数小于核心线程数
             if (addWorker(command, true))       //新建线程并执行当前任务
                 return;
             c = ctl.get();      //超过核心线程数
