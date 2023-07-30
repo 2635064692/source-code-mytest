@@ -2217,7 +2217,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
         }
 
         static <K,V> TreeNode<K,V> balanceInsertion(TreeNode<K,V> root,
-                                                    TreeNode<K,V> x) {      //平衡root节点
+                                                    TreeNode<K,V> x) {      //平衡root节点1
             x.red = true;
             for (TreeNode<K,V> xp, xpp, xppl, xppr;;) {
                 if ((xp = x.parent) == null) {
