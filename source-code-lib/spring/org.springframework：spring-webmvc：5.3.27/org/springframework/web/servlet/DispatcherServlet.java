@@ -1045,7 +1045,7 @@ public class DispatcherServlet extends FrameworkServlet {
 				multipartRequestParsed = (processedRequest != request);
 
 				// Determine handler for the current request.
-				mappedHandler = getHandler(processedRequest);
+				mappedHandler = getHandler(processedRequest);		//hLog 路径校验
 				if (mappedHandler == null) {
 					noHandlerFound(processedRequest, response);
 					return;
@@ -1069,7 +1069,7 @@ public class DispatcherServlet extends FrameworkServlet {
 				}
 
 				// Actually invoke the handler.
-				mv = ha.handle(processedRequest, response, mappedHandler.getHandler());		//404 与其他接口请求ha组装不同handler
+				mv = ha.handle(processedRequest, response, mappedHandler.getHandler());		//hLog 404 与其他接口请求ha组装不同handler
 
 				if (asyncManager.isConcurrentHandlingStarted()) {
 					return;
