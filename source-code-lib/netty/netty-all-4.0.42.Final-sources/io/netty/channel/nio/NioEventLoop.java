@@ -117,7 +117,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
     /**
      * The NIO {@link Selector}.
      */
-    Selector selector;
+    Selector selector;      //hLog 检查器；channel 套接字，数据通道
     private SelectedSelectionKeySet selectedKeys;
 
     private final SelectorProvider provider;
@@ -635,7 +635,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
                 // See https://github.com/netty/netty/issues/924
                 int ops = k.interestOps();
                 ops &= ~SelectionKey.OP_CONNECT;
-                k.interestOps(ops);
+                k.interestOps(ops);     //hLog 取消op_connect事件
 
                 unsafe.finishConnect();
             }
@@ -649,7 +649,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
             // Also check for readOps of 0 to workaround possible JDK bug which may otherwise lead
             // to a spin loop
             if ((readyOps & (SelectionKey.OP_READ | SelectionKey.OP_ACCEPT)) != 0 || readyOps == 0) {
-                unsafe.read();
+                unsafe.read();  //hLog SocketChannel-》NioByteChannel#read;  serverSocketChanel->nioMessageChannel#read
                 if (!ch.isOpen()) {
                     // Connection already closed - no need to handle write.
                     return;

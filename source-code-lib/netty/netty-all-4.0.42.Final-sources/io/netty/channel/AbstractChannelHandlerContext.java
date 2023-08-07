@@ -810,7 +810,7 @@ abstract class AbstractChannelHandlerContext extends DefaultAttributeMap impleme
         }
     }
 
-    private void write(Object msg, boolean flush, ChannelPromise promise) {
+    private void write(Object msg, boolean flush, ChannelPromise promise) {     //hLog write对标outbound
         AbstractChannelHandlerContext next = findContextOutbound();
         EventExecutor executor = next.executor();
         if (executor.inEventLoop()) {
@@ -1053,7 +1053,7 @@ abstract class AbstractChannelHandlerContext extends DefaultAttributeMap impleme
         @Override
         public final void run() {
             try {
-                ChannelOutboundBuffer buffer = ctx.channel().unsafe().outboundBuffer();
+                ChannelOutboundBuffer buffer = ctx.channel().unsafe().outboundBuffer();     //hLog 写内容
                 // Check for null as it may be set to null if the channel is closed already
                 if (ESTIMATE_TASK_SIZE_ON_SUBMIT && buffer != null) {
                     buffer.decrementPendingOutboundBytes(size);

@@ -91,7 +91,7 @@ public abstract class AbstractNioByteChannel extends AbstractNioChannel {
         }
 
         @Override
-        public final void read() {
+        public final void read() {      //hLog 读数据，根据buff桶是否装满，会继续读取，知道超过一定次数（16）
             final ChannelConfig config = config();
             if (!config.isAutoRead() && !isReadPending()) {
                 // ChannelConfig.setAutoRead(false) was called in the meantime
@@ -100,9 +100,9 @@ public abstract class AbstractNioByteChannel extends AbstractNioChannel {
             }
 
             final ChannelPipeline pipeline = pipeline();
-            final ByteBufAllocator allocator = config.getAllocator();
+            final ByteBufAllocator allocator = config.getAllocator();  //hLog 获取分配器
             final int maxMessagesPerRead = config.getMaxMessagesPerRead();
-            RecvByteBufAllocator.Handle allocHandle = this.allocHandle;
+            RecvByteBufAllocator.Handle allocHandle = this.allocHandle;     //hLog 分类控制器，会根据此次读取大小计算gess下次大小
             if (allocHandle == null) {
                 this.allocHandle = allocHandle = config.getRecvByteBufAllocator().newHandle();
             }
@@ -116,7 +116,7 @@ public abstract class AbstractNioByteChannel extends AbstractNioChannel {
                 do {
                     byteBuf = allocHandle.allocate(allocator);      //hLog 分配大小
                     int writable = byteBuf.writableBytes();
-                    int localReadAmount = doReadBytes(byteBuf);
+                    int localReadAmount = doReadBytes(byteBuf);     //hLog 真正读取
                     if (localReadAmount <= 0) {
                         // not was read release the buffer
                         byteBuf.release();
@@ -128,7 +128,7 @@ public abstract class AbstractNioByteChannel extends AbstractNioChannel {
                         readPendingReset = true;
                         setReadPending(false);
                     }
-                    pipeline.fireChannelRead(byteBuf);
+                    pipeline.fireChannelRead(byteBuf);      //hLog 每次读取传递
                     byteBuf = null;
 
                     if (totalReadAmount >= Integer.MAX_VALUE - localReadAmount) {
