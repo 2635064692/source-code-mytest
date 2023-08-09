@@ -117,7 +117,7 @@ public abstract class AbstractNioByteChannel extends AbstractNioChannel {
                     byteBuf = allocHandle.allocate(allocator);      //hLog 分配大小
                     int writable = byteBuf.writableBytes();
                     int localReadAmount = doReadBytes(byteBuf);     //hLog 真正读取
-                    if (localReadAmount <= 0) {
+                    if (localReadAmount <= 0) {     //hLog 读取完成或连接关闭
                         // not was read release the buffer
                         byteBuf.release();
                         byteBuf = null;
@@ -144,7 +144,7 @@ public abstract class AbstractNioByteChannel extends AbstractNioChannel {
                         break;
                     }
 
-                    if (localReadAmount < writable) {
+                    if (localReadAmount < writable) {   //hLog 未读满
                         // Read less than what the buffer can hold,
                         // which might mean we drained the recv buffer completely.
                         break;

@@ -371,9 +371,9 @@ public abstract class AbstractNioChannel extends AbstractChannel {
 
         readPending = true;
 
-        final int interestOps = selectionKey.interestOps();     //当前channel注册监听事件
+        final int interestOps = selectionKey.interestOps();     //hLog 当前channel注册监听事件
         if ((interestOps & readInterestOp) == 0) {
-            selectionKey.interestOps(interestOps | readInterestOp);     //nioServerSocketChannel 注册16 OP_ACCEPT 事件
+            selectionKey.interestOps(interestOps | readInterestOp);     //hLog nioServerSocketChannel 注册16 OP_ACCEPT 事件
         }
     }
 

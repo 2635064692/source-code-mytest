@@ -450,13 +450,13 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
 
                 // Ensure we call handlerAdded(...) before we actually notify the promise. This is needed as the
                 // user may already fire events through the pipeline in the ChannelFutureListener.
-                pipeline.invokeHandlerAddedIfNeeded();
+                pipeline.invokeHandlerAddedIfNeeded();  //hLog 首次注册事件通知
 
                 safeSetSuccess(promise);
                 pipeline.fireChannelRegistered();       //hLog 注册后，暂未绑定，所以还是非active，此时发送绑定事件出去
                 // Only fire a channelActive if the channel has never been registered. This prevents firing
                 // multiple channel actives if the channel is deregistered and re-registered.
-                if (isActive()) {       //hLog serverSocketChannel 需要bind才active；socketChannel不需要，直接就是active
+                if (isActive()) {       //hLog 什么场景下直接是active？？？
                     if (firstRegistration) {
                         pipeline.fireChannelActive();
                     } else if (config().isAutoRead()) {

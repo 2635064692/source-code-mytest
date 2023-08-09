@@ -531,7 +531,7 @@ abstract class AbstractChannelHandlerContext extends DefaultAttributeMap impleme
 
         final AbstractChannelHandlerContext next = findContextOutbound();
         EventExecutor executor = next.executor();
-        if (executor.inEventLoop()) {
+        if (executor.inEventLoop()) {       //hLog 均使用上下文中的执行器执行逻辑
             next.invokeConnect(remoteAddress, localAddress, promise);
         } else {
             safeExecute(executor, new Runnable() {
