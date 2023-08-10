@@ -105,7 +105,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
      *         prevents it from being added to this list
      */
     public boolean add(E e) {
-        add(size(), e);
+        add(size(), e);//hLog 
         return true;
     }
 
