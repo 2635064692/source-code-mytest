@@ -137,7 +137,7 @@ public class NamesrvStartup {       //hLog 注册中心
             throw new IllegalArgumentException("NamesrvController is null");
         }
 
-        boolean initResult = controller.initialize();   //hLog 初始化，定时任务，remotingServer
+        boolean initResult = controller.initialize();
         if (!initResult) {
             controller.shutdown();
             System.exit(-3);
