@@ -207,7 +207,7 @@ public class ConsumeMessageConcurrentlyService implements ConsumeMessageService 
         if (msgs.size() <= consumeBatchSize) {
             ConsumeRequest consumeRequest = new ConsumeRequest(msgs, processQueue, messageQueue);
             try {
-                this.consumeExecutor.submit(consumeRequest);
+                this.consumeExecutor.submit(consumeRequest);        //hLog 消费者线程池
             } catch (RejectedExecutionException e) {
                 this.submitConsumeRequestLater(consumeRequest);
             }
@@ -286,7 +286,7 @@ public class ConsumeMessageConcurrentlyService implements ConsumeMessageService 
         }
 
         switch (this.defaultMQPushConsumer.getMessageModel()) {
-            case BROADCASTING:
+            case BROADCASTING:      //hLog 广播消费，不重试
                 for (int i = ackIndex + 1; i < consumeRequest.getMsgs().size(); i++) {
                     MessageExt msg = consumeRequest.getMsgs().get(i);
                     log.warn("BROADCASTING, the message consume failed, drop it, {}", msg.toString());
@@ -296,7 +296,7 @@ public class ConsumeMessageConcurrentlyService implements ConsumeMessageService 
                 List<MessageExt> msgBackFailed = new ArrayList<MessageExt>(consumeRequest.getMsgs().size());
                 for (int i = ackIndex + 1; i < consumeRequest.getMsgs().size(); i++) {
                     MessageExt msg = consumeRequest.getMsgs().get(i);
-                    boolean result = this.sendMessageBack(msg, context);
+                    boolean result = this.sendMessageBack(msg, context);    //hLog 消息重试消费
                     if (!result) {
                         msg.setReconsumeTimes(msg.getReconsumeTimes() + 1);
                         msgBackFailed.add(msg);
@@ -460,7 +460,7 @@ public class ConsumeMessageConcurrentlyService implements ConsumeMessageService 
                 .incConsumeRT(ConsumeMessageConcurrentlyService.this.consumerGroup, messageQueue.getTopic(), consumeRT);
 
             if (!processQueue.isDropped()) {
-                ConsumeMessageConcurrentlyService.this.processConsumeResult(status, context, this);
+                ConsumeMessageConcurrentlyService.this.processConsumeResult(status, context, this);     //hLog 处理消息消费异常
             } else {
                 log.warn("processQueue is dropped without process consume result. messageQueue={}, msgs={}", messageQueue, msgs);
             }

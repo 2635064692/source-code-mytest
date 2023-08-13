@@ -55,6 +55,7 @@ public class BrokerStartup {    //hLog broker启动项；需要配置nameserv地
     public static InternalLogger log;
 
     public static void main(String[] args) {
+//        args = new String[] {"-c", "distribution/conf/broker.conf"};
         start(createBrokerController(args));
     }
 

@@ -543,7 +543,7 @@ public class CommitLog {
         if (tranType == MessageSysFlag.TRANSACTION_NOT_TYPE
             || tranType == MessageSysFlag.TRANSACTION_COMMIT_TYPE) {
             // Delay Delivery
-            if (msg.getDelayTimeLevel() > 0) {
+            if (msg.getDelayTimeLevel() > 0) {      //hLog 代表重试消息
                 if (msg.getDelayTimeLevel() > this.defaultMessageStore.getScheduleMessageService().getMaxDelayLevel()) {
                     msg.setDelayTimeLevel(this.defaultMessageStore.getScheduleMessageService().getMaxDelayLevel());
                 }
@@ -632,7 +632,7 @@ public class CommitLog {
         storeStatsService.getSinglePutMessageTopicSizeTotal(topic).addAndGet(result.getWroteBytes());
 
         handleDiskFlush(result, putMessageResult, msg);     //hLog 落盘处理
-        handleHA(result, putMessageResult, msg);
+        handleHA(result, putMessageResult, msg);            //hLog 主从同步
 
         return putMessageResult;
     }
@@ -1020,8 +1020,8 @@ public class CommitLog {
         }
 
         private void printFlushProgress() {
-            System.out.println("how much disk fall behind memory, "
-             + CommitLog.this.mappedFileQueue.howMuchFallBehind());
+//            System.out.println("how much disk fall behind memory, "
+//             + CommitLog.this.mappedFileQueue.howMuchFallBehind());
         }
 
         @Override

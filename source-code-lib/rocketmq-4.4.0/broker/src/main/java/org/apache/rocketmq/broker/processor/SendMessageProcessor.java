@@ -134,7 +134,7 @@ public class SendMessageProcessor extends AbstractSendMessageProcessor implement
             return response;
         }
 
-        String newTopic = MixAll.getRetryTopic(requestHeader.getGroup());
+        String newTopic = MixAll.getRetryTopic(requestHeader.getGroup());   //hLog 重试topic
         int queueIdInt = Math.abs(this.random.nextInt() % 99999999) % subscriptionGroupConfig.getRetryQueueNums();
 
         int topicSysFlag = 0;

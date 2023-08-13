@@ -127,7 +127,7 @@ public class DefaultMessageStore implements MessageStore {
         this.cleanConsumeQueueService = new CleanConsumeQueueService();
         this.storeStatsService = new StoreStatsService();
         this.indexService = new IndexService(this);
-        this.haService = new HAService(this);
+        this.haService = new HAService(this);   //hLog 主从服务
 
         this.reputMessageService = new ReputMessageService();
 

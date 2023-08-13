@@ -432,7 +432,7 @@ public class MQClientAPIImpl {
         });
     }
 
-    private void onExceptionImpl(final String brokerName,
+    private void onExceptionImpl(final String brokerName,   //hLog 发送异常立即重试
         final Message msg,
         final long timeoutMillis,
         final RemotingCommand request,

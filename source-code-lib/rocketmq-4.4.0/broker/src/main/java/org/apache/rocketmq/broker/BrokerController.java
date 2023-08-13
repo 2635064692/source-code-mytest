@@ -409,7 +409,7 @@ public class BrokerController {
                     @Override
                     public void run() {
                         try {
-                            BrokerController.this.slaveSynchronize.syncAll();
+                            BrokerController.this.slaveSynchronize.syncAll();       //hLog 定期主从同步
                         } catch (Throwable e) {
                             log.error("ScheduledTask syncAll slave exception", e);
                         }

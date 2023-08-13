@@ -504,7 +504,7 @@ public class DefaultMQProducerImpl implements MQProducerInner {
     }
 
 
-    public MessageQueue selectOneMessageQueue(final TopicPublishInfo tpInfo, final String lastBrokerName) {
+    public MessageQueue selectOneMessageQueue(final TopicPublishInfo tpInfo, final String lastBrokerName) {     //hLog 选择特定队列发送
         return this.mqFaultStrategy.selectOneMessageQueue(tpInfo, lastBrokerName);
     }
 
@@ -778,7 +778,7 @@ public class DefaultMQProducerImpl implements MQProducerInner {
                             //Clone new message using commpressed message body and recover origin massage.
                             //Fix bug:https://github.com/apache/rocketmq-externals/issues/66
                             tmpMessage = MessageAccessor.cloneMessage(msg);
-                            msg.setBody(prevBody);
+                            msg.setBody(prevBody);      //hLog 异步需要单独处理，原因是，异步发送未完成时，final就将body reset，此时导致发送的msg里面body出现问题
                         }
                         long costTimeAsync = System.currentTimeMillis() - beginStartTime;
                         if (timeout < costTimeAsync) {
@@ -794,7 +794,7 @@ public class DefaultMQProducerImpl implements MQProducerInner {
                             sendCallback,
                             topicPublishInfo,
                             this.mQClientFactory,
-                            this.defaultMQProducer.getRetryTimesWhenSendAsyncFailed(),
+                            this.defaultMQProducer.getRetryTimesWhenSendAsyncFailed(),  //hLog 异步重试次数
                             context,
                             this);
                         break;
@@ -804,7 +804,7 @@ public class DefaultMQProducerImpl implements MQProducerInner {
                         if (timeout < costTimeSync) {
                             throw new RemotingTooMuchRequestException("sendKernelImpl call timeout");
                         }
-                        sendResult = this.mQClientFactory.getMQClientAPIImpl().sendMessage(
+                        sendResult = this.mQClientFactory.getMQClientAPIImpl().sendMessage(     //hLog 同步发送，无重试机制
                             brokerAddr,
                             mq.getBrokerName(),
                             msg,
