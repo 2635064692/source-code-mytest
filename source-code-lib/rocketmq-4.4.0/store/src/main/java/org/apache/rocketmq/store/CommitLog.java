@@ -672,7 +672,7 @@ public class CommitLog {
                 if (service.isSlaveOK(result.getWroteOffset() + result.getWroteBytes())) {
                     GroupCommitRequest request = new GroupCommitRequest(result.getWroteOffset() + result.getWroteBytes());
                     service.putRequest(request);
-                    service.getWaitNotifyObject().wakeupAll();
+                    service.getWaitNotifyObject().wakeupAll();      //hLog 真正同步操作唤醒
                     boolean flushOK =
                         request.waitForFlush(this.defaultMessageStore.getMessageStoreConfig().getSyncFlushTimeout());
                     if (!flushOK) {

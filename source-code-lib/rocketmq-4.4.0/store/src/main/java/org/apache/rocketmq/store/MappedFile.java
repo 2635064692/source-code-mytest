@@ -60,7 +60,7 @@ public class MappedFile extends ReferenceResource {
     protected ByteBuffer writeBuffer = null;
     protected TransientStorePool transientStorePool = null;
     private String fileName;
-    private long fileFromOffset;
+    private long fileFromOffset;    //hLog 文件偏移量，通过文件名计算该文件起始偏移量，（所有commitLog 文件组成的一个大log ，在这个大log中的偏移位）
     private File file;
     private MappedByteBuffer mappedByteBuffer;      //hLog buffer映射（内存）
     private volatile long storeTimestamp = 0;
@@ -477,7 +477,7 @@ public class MappedFile extends ReferenceResource {
      * @return The max position which have valid data
      */
     public int getReadPosition() {
-        return this.writeBuffer == null ? this.wrotePosition.get() : this.committedPosition.get();
+        return this.writeBuffer == null ? this.wrotePosition.get() : this.committedPosition.get();      //hLog writeBuffer不为空，说明内存有内容，以内存内容为准
     }
 
     public void setCommittedPosition(int pos) {

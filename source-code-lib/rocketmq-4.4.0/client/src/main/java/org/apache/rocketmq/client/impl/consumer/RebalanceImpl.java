@@ -43,7 +43,7 @@ import org.apache.rocketmq.common.protocol.heartbeat.SubscriptionData;
 /**
  * Base class for rebalance algorithm
  */
-public abstract class RebalanceImpl {
+public abstract class RebalanceImpl {       //hLog 跟consumer绑定，一个consumer一个rebalance service
     protected static final InternalLogger log = ClientLogger.getLog();
     protected final ConcurrentMap<MessageQueue, ProcessQueue> processQueueTable = new ConcurrentHashMap<MessageQueue, ProcessQueue>(64);
     protected final ConcurrentMap<String/* topic */, Set<MessageQueue>> topicSubscribeInfoTable =
@@ -133,7 +133,7 @@ public abstract class RebalanceImpl {
         return result;
     }
 
-    public boolean lock(final MessageQueue mq) {
+    public boolean lock(final MessageQueue mq) {        //hLog 验证当前mq消息队列是否有被消费者使用
         FindBrokerResult findBrokerResult = this.mQClientFactory.findBrokerAddressInSubscribe(mq.getBrokerName(), MixAll.MASTER_ID, true);
         if (findBrokerResult != null) {
             LockBatchRequestBody requestBody = new LockBatchRequestBody();
@@ -257,9 +257,9 @@ public abstract class RebalanceImpl {
                 }
                 break;
             }
-            case CLUSTERING: {
+            case CLUSTERING: {      //hLog consumer 均摊 messageQueue
                 Set<MessageQueue> mqSet = this.topicSubscribeInfoTable.get(topic);
-                List<String> cidAll = this.mQClientFactory.findConsumerIdList(topic, consumerGroup);
+                List<String> cidAll = this.mQClientFactory.findConsumerIdList(topic, consumerGroup);        //hLog 获取有多少个consumer
                 if (null == mqSet) {
                     if (!topic.startsWith(MixAll.RETRY_GROUP_TOPIC_PREFIX)) {
                         log.warn("doRebalance, {}, but the topic[{}] not exist.", consumerGroup, topic);
@@ -281,7 +281,7 @@ public abstract class RebalanceImpl {
 
                     List<MessageQueue> allocateResult = null;
                     try {
-                        allocateResult = strategy.allocate(
+                        allocateResult = strategy.allocate(     //hLog 给当前consumer client 分配n个messageQueue
                             this.consumerGroup,
                             this.mQClientFactory.getClientId(),
                             mqAll,

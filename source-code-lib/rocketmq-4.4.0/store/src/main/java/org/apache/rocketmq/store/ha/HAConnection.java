@@ -170,7 +170,7 @@ public class HAConnection {
                                 log.info("slave[" + HAConnection.this.clientAddr + "] request offset " + readOffset);
                             }
 
-                            HAConnection.this.haService.notifyTransferSome(HAConnection.this.slaveAckOffset);
+                            HAConnection.this.haService.notifyTransferSome(HAConnection.this.slaveAckOffset);       //hLog salve->master 同步位置offest
                         }
                     } else if (readSize == 0) {
                         if (++readSizeZeroTimes >= 3) {

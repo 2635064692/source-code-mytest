@@ -52,7 +52,7 @@ public class HAService {        //hLog 主从配置，那么主为server，从�
     private final DefaultMessageStore defaultMessageStore;
 
     private final WaitNotifyObject waitNotifyObject = new WaitNotifyObject();
-    private final AtomicLong push2SlaveMaxOffset = new AtomicLong(0);
+    private final AtomicLong push2SlaveMaxOffset = new AtomicLong(0);   //hLog 同步点位更新
 
     private final GroupTransferService groupTransferService;
 
@@ -76,12 +76,12 @@ public class HAService {        //hLog 主从配置，那么主为server，从�
         this.groupTransferService.putRequest(request);
     }
 
-    public boolean isSlaveOK(final long masterPutWhere) {
+    public boolean isSlaveOK(final long masterPutWhere) {  //hLog masterPutWhere：消息写入（后）位置
         boolean result = this.connectionCount.get() > 0;
         result =
             result
                 && ((masterPutWhere - this.push2SlaveMaxOffset.get()) < this.defaultMessageStore
-                .getMessageStoreConfig().getHaSlaveFallbehindMax());
+                .getMessageStoreConfig().getHaSlaveFallbehindMax());    //hLog 一次同步限量
         return result;
     }
 
@@ -275,7 +275,7 @@ public class HAService {        //hLog 主从配置，那么主为server，从�
             this.requestsRead = tmp;
         }
 
-        private void doWaitTransfer() {
+        private void doWaitTransfer() {     //hLog 五秒发送等待结果
             synchronized (this.requestsRead) {
                 if (!this.requestsRead.isEmpty()) {
                     for (CommitLog.GroupCommitRequest req : this.requestsRead) {
@@ -404,7 +404,7 @@ public class HAService {        //hLog 主从配置，那么主为server，从�
             int readSizeZeroTimes = 0;
             while (this.byteBufferRead.hasRemaining()) {
                 try {
-                    int readSize = this.socketChannel.read(this.byteBufferRead);
+                    int readSize = this.socketChannel.read(this.byteBufferRead);        //hLog 接受master响应
                     if (readSize > 0) {
                         lastWriteTimestamp = HAService.this.defaultMessageStore.getSystemClock().now();
                         readSizeZeroTimes = 0;
@@ -437,13 +437,13 @@ public class HAService {        //hLog 主从配置，那么主为server，从�
             while (true) {
                 int diff = this.byteBufferRead.position() - this.dispatchPostion;
                 if (diff >= msgHeaderSize) {
-                    long masterPhyOffset = this.byteBufferRead.getLong(this.dispatchPostion);
+                    long masterPhyOffset = this.byteBufferRead.getLong(this.dispatchPostion);   //hLog master同步起始偏移
                     int bodySize = this.byteBufferRead.getInt(this.dispatchPostion + 8);
 
-                    long slavePhyOffset = HAService.this.defaultMessageStore.getMaxPhyOffset();
+                    long slavePhyOffset = HAService.this.defaultMessageStore.getMaxPhyOffset();     //hLog 获取当前最新偏移位（即最新消息写入点）
 
                     if (slavePhyOffset != 0) {
-                        if (slavePhyOffset != masterPhyOffset) {
+                        if (slavePhyOffset != masterPhyOffset) {        //hLog 确保主从数据一致性
                             log.error("master pushed offset not equal the max phy offset in slave, SLAVE: "
                                 + slavePhyOffset + " MASTER: " + masterPhyOffset);
                             return false;
@@ -452,8 +452,8 @@ public class HAService {        //hLog 主从配置，那么主为server，从�
 
                     if (diff >= (msgHeaderSize + bodySize)) {
                         byte[] bodyData = new byte[bodySize];
-                        this.byteBufferRead.position(this.dispatchPostion + msgHeaderSize);
-                        this.byteBufferRead.get(bodyData);
+                        this.byteBufferRead.position(this.dispatchPostion + msgHeaderSize);     //hLog 不读请求头，跳过
+                        this.byteBufferRead.get(bodyData);      //hLog 剩下都是请求体
 
                         HAService.this.defaultMessageStore.appendToCommitLog(masterPhyOffset, bodyData);
 
@@ -550,8 +550,8 @@ public class HAService {        //hLog 主从配置，那么主为server，从�
                 try {
                     if (this.connectMaster()) {
 
-                        if (this.isTimeToReportOffset()) {      //hLog 间隔时间同步报告
-                            boolean result = this.reportSlaveMaxOffset(this.currentReportedOffset);
+                        if (this.isTimeToReportOffset()) {  //hLog 心跳
+                            boolean result = this.reportSlaveMaxOffset(this.currentReportedOffset);     //hLog 向master发送需要同步信号，以及从哪里同步offest
                             if (!result) {
                                 this.closeMaster();
                             }
