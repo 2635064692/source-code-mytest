@@ -56,7 +56,7 @@ public class PullMessageService extends ServiceThread {     //hLog 消息拉取�
         }
     }
 
-    public void executePullRequestImmediately(final PullRequest pullRequest) {
+    public void executePullRequestImmediately(final PullRequest pullRequest) {      //hLog 立马重新拉取
         try {
             this.pullRequestQueue.put(pullRequest);
         } catch (InterruptedException e) {

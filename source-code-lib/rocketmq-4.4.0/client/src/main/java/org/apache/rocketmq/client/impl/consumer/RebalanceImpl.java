@@ -376,7 +376,7 @@ public abstract class RebalanceImpl {       //hLog 跟consumer绑定，一个con
 
                 this.removeDirtyOffset(mq);
                 ProcessQueue pq = new ProcessQueue();
-                long nextOffset = this.computePullFromWhere(mq);
+                long nextOffset = this.computePullFromWhere(mq);        //hLog 根据消费类型重置消费点位
                 if (nextOffset >= 0) {
                     ProcessQueue pre = this.processQueueTable.putIfAbsent(mq, pq);
                     if (pre != null) {

@@ -206,7 +206,7 @@ public class DefaultMQPushConsumerImpl implements MQConsumerInner {
         pullRequest.getProcessQueue().setLastPullTimestamp(System.currentTimeMillis());
 
         try {
-            this.makeSureStateOK();
+            this.makeSureStateOK();     //hLog 确认消费者状态
         } catch (MQClientException e) {
             log.warn("pullMessage exception, consumer state not ok", e);
             this.executePullRequestLater(pullRequest, PULL_TIME_DELAY_MILLS_WHEN_EXCEPTION);
@@ -444,7 +444,7 @@ public class DefaultMQPushConsumerImpl implements MQConsumerInner {
         }
     }
 
-    private void executePullRequestLater(final PullRequest pullRequest, final long timeDelay) {
+    private void executePullRequestLater(final PullRequest pullRequest, final long timeDelay) {     //hLog 按场景定时执行拉取任务，存在间隔时间
         this.mQClientFactory.getPullMessageService().executePullRequestLater(pullRequest, timeDelay);
     }
 
@@ -460,7 +460,7 @@ public class DefaultMQPushConsumerImpl implements MQConsumerInner {
         return this.mQClientFactory.getConsumerStatsManager();
     }
 
-    public void executePullRequestImmediately(final PullRequest pullRequest) {
+    public void executePullRequestImmediately(final PullRequest pullRequest) {      //hLog 更新offest立马拉取，拉取为空、拉取任务无间隔、无新消息
         this.mQClientFactory.getPullMessageService().executePullRequestImmediately(pullRequest);
     }
 
@@ -488,7 +488,7 @@ public class DefaultMQPushConsumerImpl implements MQConsumerInner {
         this.messageListenerInner = messageListener;
     }
 
-    public void resume() {
+    public void resume() {      //hLog 重置，中断后继续
         this.pause = false;
         doRebalance();
         log.info("resume this consumer, {}", this.defaultMQPushConsumer.getConsumerGroup());
@@ -558,7 +558,7 @@ public class DefaultMQPushConsumerImpl implements MQConsumerInner {
 
                 this.checkConfig();
 
-                this.copySubscription();    //hLog retryTopic加入拉取table
+                this.copySubscription();    //hLog 集群模式重试功能 retryTopic加入拉取table
 
                 if (this.defaultMQPushConsumer.getMessageModel() == MessageModel.CLUSTERING) {
                     this.defaultMQPushConsumer.changeInstanceNameToPID();
