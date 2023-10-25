@@ -20,7 +20,7 @@ import org.flowable.engine.delegate.DelegateExecution;
  * @author Tom Baeyens
  * @author Joram Barrez
  */
-public interface ActivityBehavior extends Serializable {    //活动的执行逻辑
+public interface ActivityBehavior extends Serializable {    //hLog 活动的执行逻辑
 
     void execute(DelegateExecution execution);
 }

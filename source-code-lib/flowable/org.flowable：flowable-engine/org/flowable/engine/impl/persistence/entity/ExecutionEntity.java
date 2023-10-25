@@ -27,7 +27,7 @@ import org.flowable.engine.runtime.ProcessInstance;
  * @author Daniel Meyer
  * @author Falko Menge
  * @author Saeid Mirzaei
- * @author Joram Barrez         //一个正在执行或已经完成的流程实例
+ * @author Joram Barrez         //hLog 一个正在执行或已经完成的流程实例
  */
 
 public interface ExecutionEntity extends DelegateExecution, Execution, ProcessInstance, Entity, HasRevision {

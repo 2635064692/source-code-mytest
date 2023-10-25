@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * @author Joram Barrez
  * @author Tijs Rademakers
  */
-public class TakeOutgoingSequenceFlowsOperation extends AbstractOperation {         //流程线流转
+public class TakeOutgoingSequenceFlowsOperation extends AbstractOperation {         //hLog 流程线流转
 
     private static final Logger logger = LoggerFactory.getLogger(TakeOutgoingSequenceFlowsOperation.class);
 
@@ -64,7 +64,7 @@ public class TakeOutgoingSequenceFlowsOperation extends AbstractOperation {     
         FlowElement currentFlowElement = getCurrentFlowElement(execution);
 
         // Compensation check
-        if ((currentFlowElement instanceof Activity)        //任务型节点
+        if ((currentFlowElement instanceof Activity)        //hLog 任务型节点
                 && (((Activity) currentFlowElement)).isForCompensation()) {
 
             /*
@@ -81,17 +81,17 @@ public class TakeOutgoingSequenceFlowsOperation extends AbstractOperation {     
 
         if (currentFlowElement instanceof FlowNode) {
             handleFlowNode((FlowNode) currentFlowElement);
-        } else if (currentFlowElement instanceof SequenceFlow) {        //流程线
+        } else if (currentFlowElement instanceof SequenceFlow) {        //hLog 流程线
             handleSequenceFlow();
         }
     }
 
     protected void handleFlowNode(FlowNode flowNode) {
-        handleActivityEnd(flowNode);        //节点完成事件发送，监听处理
-        if (flowNode.getParentContainer() != null && flowNode.getParentContainer() instanceof AdhocSubProcess) {        //特殊的子流程类型，用于处理非结构化流程和临时任务
-            handleAdhocSubProcess(flowNode);        //AdhocSubProcess 运行时确定执行顺序
+        handleActivityEnd(flowNode);        //hLog 节点完成事件发送，监听处理
+        if (flowNode.getParentContainer() != null && flowNode.getParentContainer() instanceof AdhocSubProcess) {        //hLog 特殊的子流程类型，用于处理非结构化流程和临时任务
+            handleAdhocSubProcess(flowNode);        //hLog AdhocSubProcess 运行时确定执行顺序
         } else {
-            leaveFlowNode(flowNode);        //流程节点流转
+            leaveFlowNode(flowNode);        //hLog 流程节点流转
         }
     }
 
@@ -122,14 +122,14 @@ public class TakeOutgoingSequenceFlowsOperation extends AbstractOperation {     
 
         // Get default sequence flow (if set)
         String defaultSequenceFlowId = null;
-        if (flowNode instanceof Activity) {     //工作节点
+        if (flowNode instanceof Activity) {     //hLog 工作节点
             defaultSequenceFlowId = ((Activity) flowNode).getDefaultFlow();
-        } else if (flowNode instanceof Gateway) {   //网关节点
+        } else if (flowNode instanceof Gateway) {   //hLog 网关节点
             defaultSequenceFlowId = ((Gateway) flowNode).getDefaultFlow();
         }
 
         // Determine which sequence flows can be used for leaving
-        List<SequenceFlow> outgoingSequenceFlows = new ArrayList<SequenceFlow>();   //下一流程节点组装
+        List<SequenceFlow> outgoingSequenceFlows = new ArrayList<SequenceFlow>();   //hLog 下一流程节点组装
         for (SequenceFlow sequenceFlow : flowNode.getOutgoingFlows()) {
 
             String skipExpressionString = sequenceFlow.getSkipExpression();
@@ -162,7 +162,7 @@ public class TakeOutgoingSequenceFlowsOperation extends AbstractOperation {     
         if (outgoingSequenceFlows.size() == 0) {
             if (flowNode.getOutgoingFlows() == null || flowNode.getOutgoingFlows().size() == 0) {
                 logger.debug("No outgoing sequence flow found for flow node '{}'.", flowNode.getId());
-                agenda.planEndExecutionOperation(execution);        //流程结束，无子节点
+                agenda.planEndExecutionOperation(execution);        //hLog 流程结束，无子节点
 
             } else {
                 throw new FlowableException("No outgoing sequence flow of element '" + flowNode.getId() + "' could be selected for continuing the process");

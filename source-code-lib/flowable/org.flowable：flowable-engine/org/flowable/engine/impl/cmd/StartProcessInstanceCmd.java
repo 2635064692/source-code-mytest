@@ -72,7 +72,7 @@ public class StartProcessInstanceCmd<T> implements Command<ProcessInstance>, Ser
         DeploymentManager deploymentCache = commandContext.getProcessEngineConfiguration().getDeploymentManager();
 
         // Find the process definition
-        ProcessDefinition processDefinition = null;     //流程定义，查询得到
+        ProcessDefinition processDefinition = null;     //hLog 流程定义，查询得到
         if (processDefinitionId != null) {
 
             processDefinition = deploymentCache.findDeployedProcessDefinitionById(processDefinitionId);

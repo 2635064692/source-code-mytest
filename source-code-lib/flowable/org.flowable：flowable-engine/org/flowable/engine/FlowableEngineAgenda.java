@@ -29,7 +29,7 @@ public interface FlowableEngineAgenda extends Agenda {
 
     void planContinueMultiInstanceOperation(ExecutionEntity execution);
 
-    void planTakeOutgoingSequenceFlowsOperation(ExecutionEntity execution, boolean evaluateConditions);     //向下流转
+    void planTakeOutgoingSequenceFlowsOperation(ExecutionEntity execution, boolean evaluateConditions);     //hLog 向下流转
 
     void planEndExecutionOperation(ExecutionEntity execution);
 

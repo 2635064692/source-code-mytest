@@ -37,8 +37,8 @@ public class AbstractBpmnActivityBehavior extends FlowNodeActivityBehavior {
 
     private static final long serialVersionUID = 1L;
 
-    protected MultiInstanceActivityBehavior multiInstanceActivityBehavior;      //处理多实例活动的行为类，它提供了处理多实例活动的逻辑和方法
-                                                                                //即复杂节点控制
+    protected MultiInstanceActivityBehavior multiInstanceActivityBehavior;      //hLog 处理多实例活动的行为类，它提供了处理多实例活动的逻辑和方法
+                                                                                //hLog 即复杂节点控制
     /**
      * Subclasses that call leave() will first pass through this method, before the regular {@link FlowNodeActivityBehavior#leave(DelegateExecution)} is called. This way, we can check if the activity
      * has loop characteristics, and delegate to the behavior if this is the case.

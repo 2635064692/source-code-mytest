@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * @author Joram Barrez
  * @author Tom Baeyens
  */
-public class ParallelGatewayActivityBehavior extends GatewayActivityBehavior {//并行网关，成对出现
+public class ParallelGatewayActivityBehavior extends GatewayActivityBehavior {//hLog 并行网关，成对出现
 
     private static final long serialVersionUID = 1840892471343975524L;
 
@@ -55,7 +55,7 @@ public class ParallelGatewayActivityBehavior extends GatewayActivityBehavior {//
     public void execute(DelegateExecution execution) {
 
         // First off all, deactivate the execution
-        execution.inactivate();     //遇到并行网关，先停止流程，等待执行条件完成后继续向后
+        execution.inactivate();     //hLog 遇到并行网关，先停止流程，等待执行条件完成后继续向后
 
         // Join
         FlowElement flowElement = execution.getCurrentFlowElement();
@@ -66,7 +66,7 @@ public class ParallelGatewayActivityBehavior extends GatewayActivityBehavior {//
             throw new FlowableException("Programmatic error: parallel gateway behaviour can only be applied" + " to a ParallelGateway instance, but got an instance of " + flowElement);
         }
 
-        lockFirstParentScope(execution);        //查找父级执行过程并替换成父级execution
+        lockFirstParentScope(execution);        //hLog 查找父级执行过程并替换成父级execution
 
         DelegateExecution multiInstanceExecution = null;
         if (hasMultiInstanceParent(parallelGateway)) {

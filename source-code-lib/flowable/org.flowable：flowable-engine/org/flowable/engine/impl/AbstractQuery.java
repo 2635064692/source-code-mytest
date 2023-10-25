@@ -126,7 +126,7 @@ public abstract class AbstractQuery<T extends Query<?, ?>, U> extends ListQueryP
     }
 
     @SuppressWarnings("unchecked")
-    public List<U> list() {     //列表查询
+    public List<U> list() {     //hLog 列表查询
         this.resultType = ResultType.LIST;
         if (commandExecutor != null) {
             return (List<U>) commandExecutor.execute(this);

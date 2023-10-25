@@ -41,7 +41,7 @@ public class DefaultFlowableEngineAgenda implements FlowableEngineAgenda {
 
     protected CommandContext commandContext;
 
-    protected LinkedList<Runnable> operations = new LinkedList<Runnable>();         //操作栈
+    protected LinkedList<Runnable> operations = new LinkedList<Runnable>();         //hLog 操作栈
 
     public DefaultFlowableEngineAgenda(CommandContext commandContext) {
         this.commandContext = commandContext;
@@ -104,7 +104,7 @@ public class DefaultFlowableEngineAgenda implements FlowableEngineAgenda {
         planOperation(new ContinueMultiInstanceOperation(commandContext, execution), execution);
     }
 
-    public void planTakeOutgoingSequenceFlowsOperation(ExecutionEntity execution, boolean evaluateConditions) {     //输出流 （下一步）
+    public void planTakeOutgoingSequenceFlowsOperation(ExecutionEntity execution, boolean evaluateConditions) {     //hLog 输出流 （下一步）
         planOperation(new TakeOutgoingSequenceFlowsOperation(commandContext, execution, evaluateConditions), execution);
     }
 

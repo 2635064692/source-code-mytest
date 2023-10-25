@@ -222,17 +222,17 @@ public class UserTaskActivityBehavior extends TaskActivityBehavior {
         }
     }
 
-    public void trigger(DelegateExecution execution, String signalName, Object signalData) {  //任务完成后置触发器
+    public void trigger(DelegateExecution execution, String signalName, Object signalData) {  //hLog 任务完成后置触发器
         CommandContext commandContext = Context.getCommandContext();
         TaskEntityManager taskEntityManager = commandContext.getTaskEntityManager();
         List<TaskEntity> taskEntities = taskEntityManager.findTasksByExecutionId(execution.getId()); // Should be only one
         for (TaskEntity taskEntity : taskEntities) {
-            if (!taskEntity.isDeleted()) {      //只可能有一个task，并且未完成状态
+            if (!taskEntity.isDeleted()) {      //hLog 只可能有一个task，并且未完成状态
                 throw new FlowableException("UserTask should not be signalled before complete");
             }
         }
 
-        leave(execution);       //流转
+        leave(execution);       //hLog 流转
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

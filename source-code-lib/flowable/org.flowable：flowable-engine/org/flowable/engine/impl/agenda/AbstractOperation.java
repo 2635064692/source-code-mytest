@@ -29,7 +29,7 @@ import org.flowable.engine.impl.util.ProcessDefinitionUtil;
  * 
  * @author Joram Barrez
  */
-public abstract class AbstractOperation implements Runnable {   //终结节点操作、触发节点操作、流转节点操作、延续节点操作
+public abstract class AbstractOperation implements Runnable {   //hLog 终结节点操作、触发节点操作、流转节点操作、延续节点操作
 
     protected CommandContext commandContext;
     protected FlowableEngineAgenda agenda;

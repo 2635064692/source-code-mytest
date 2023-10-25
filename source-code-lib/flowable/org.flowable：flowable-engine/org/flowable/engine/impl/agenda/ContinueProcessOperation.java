@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * @author Joram Barrez
  * @author Tijs Rademakers
  */
-public class ContinueProcessOperation extends AbstractOperation {           //任务流转下一节点控制器，继续执行控制器
+public class ContinueProcessOperation extends AbstractOperation {           //hLog 任务流转下一节点控制器，继续执行控制器
 
     private static Logger logger = LoggerFactory.getLogger(ContinueProcessOperation.class);
 
@@ -88,7 +88,7 @@ public class ContinueProcessOperation extends AbstractOperation {           //�
         if (flowNode.getIncomingFlows() != null
                 && flowNode.getIncomingFlows().size() == 0
                 && flowNode.getSubProcess() == null) {
-            executeProcessStartExecutionListeners();        //执行监听器
+            executeProcessStartExecutionListeners();        //hLog 执行监听器
         }
 
         // For a subprocess, a new child execution is created that will visit the steps of the subprocess
@@ -216,7 +216,7 @@ public class ContinueProcessOperation extends AbstractOperation {           //�
         if (Context.getProcessEngineConfiguration() != null && Context.getProcessEngineConfiguration().getEventDispatcher().isEnabled()) {
             FlowElement sourceFlowElement = sequenceFlow.getSourceFlowElement();
             FlowElement targetFlowElement = sequenceFlow.getTargetFlowElement();
-            Context.getProcessEngineConfiguration().getEventDispatcher().dispatchEvent(         //发布事件
+            Context.getProcessEngineConfiguration().getEventDispatcher().dispatchEvent(         //hLog 发布事件
                     FlowableEventBuilder.createSequenceFlowTakenEvent(
                             execution,
                             FlowableEngineEventType.SEQUENCEFLOW_TAKEN,

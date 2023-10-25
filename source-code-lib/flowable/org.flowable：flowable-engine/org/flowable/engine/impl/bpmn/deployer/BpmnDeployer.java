@@ -62,14 +62,14 @@ public class BpmnDeployer implements Deployer {
     protected ProcessDefinitionDiagramHelper processDefinitionDiagramHelper;
 
     @Override
-    public void deploy(DeploymentEntity deployment, Map<String, Object> deploymentSettings) {   //流程定义xml配置部署
+    public void deploy(DeploymentEntity deployment, Map<String, Object> deploymentSettings) {   //hLog 流程定义xml配置部署
         log.debug("Processing deployment {}", deployment.getName());
 
         // The ParsedDeployment represents the deployment, the process definitions, and the BPMN
         // resource, parse, and model associated with each process definition.
         ParsedDeployment parsedDeployment = parsedDeploymentBuilderFactory
                 .getBuilderForDeploymentAndSettings(deployment, deploymentSettings)
-                .build();       //解析部署配置
+                .build();       //hLog 解析部署配置
 
         bpmnDeploymentHelper.verifyProcessDefinitionsDoNotShareKeys(parsedDeployment.getAllProcessDefinitions());
 
@@ -89,7 +89,7 @@ public class BpmnDeployer implements Deployer {
             makeProcessDefinitionsConsistentWithPersistedVersions(parsedDeployment);
         }
 
-        cachingAndArtifactsManager.updateCachingAndArtifacts(parsedDeployment);     //流程定义缓存
+        cachingAndArtifactsManager.updateCachingAndArtifacts(parsedDeployment);     //hLog 流程定义缓存
 
         if (deployment.isNew()) {
             dispatchProcessDefinitionEntityInitializedEvent(parsedDeployment);

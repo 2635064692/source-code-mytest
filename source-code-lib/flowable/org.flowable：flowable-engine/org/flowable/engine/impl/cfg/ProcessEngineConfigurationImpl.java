@@ -351,7 +351,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author Tom Baeyens
  * @author Joram Barrez
  */
-public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfiguration {       //流程配置类，初始化
+public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfiguration {       //hLog 流程配置类，初始化
 
     private static Logger log = LoggerFactory.getLogger(ProcessEngineConfigurationImpl.class);
 

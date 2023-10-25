@@ -184,7 +184,7 @@ public class ProcessInstanceHelper {
         }
 
         // Create the first execution that will visit all the process definition elements
-        ExecutionEntity execution = commandContext.getExecutionEntityManager().createChildExecution(processInstance);       //将子execution添加进processInstance（流程节点添加）
+        ExecutionEntity execution = commandContext.getExecutionEntityManager().createChildExecution(processInstance);       //hLog 将子execution添加进processInstance（流程节点添加）
         execution.setCurrentFlowElement(initialFlowElement);
 
         if (startProcessInstance) {
@@ -201,7 +201,7 @@ public class ProcessInstanceHelper {
         processAvailableEventSubProcesses(processInstance, process, commandContext);
 
         ExecutionEntity execution = processInstance.getExecutions().get(0); // There will always be one child execution created
-        commandContext.getAgenda().planContinueProcessOperation(execution);         //初始操作入栈
+        commandContext.getAgenda().planContinueProcessOperation(execution);         //hLog 初始操作入栈
 
         if (Context.getProcessEngineConfiguration().getEventDispatcher().isEnabled()) {
             FlowableEventDispatcher eventDispatcher = Context.getProcessEngineConfiguration().getEventDispatcher();

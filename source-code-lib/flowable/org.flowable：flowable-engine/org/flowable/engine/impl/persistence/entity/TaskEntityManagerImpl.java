@@ -234,7 +234,7 @@ public class TaskEntityManagerImpl extends AbstractEntityManager<TaskEntity> imp
     }
 
     @Override
-    public void delete(TaskEntity entity, boolean fireDeleteEvent) {        //为啥这么多软删？ 提高效率，执行结束后统一批量落盘
+    public void delete(TaskEntity entity, boolean fireDeleteEvent) {        //hLog 为啥这么多软删？ 提高效率，执行结束后统一批量落盘
         super.delete(entity, fireDeleteEvent);
 
         if (entity.getExecutionId() != null && isExecutionRelatedEntityCountEnabledGlobally()) {

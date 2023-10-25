@@ -69,7 +69,7 @@ public class CommandContextInterceptor extends AbstractCommandInterceptor {
 
         } finally {
             try {
-                if (!contextReused) {       //指令执行完成后，seesion交互（数据库相关）
+                if (!contextReused) {       //hLog 指令执行完成后，seesion交互（数据库相关）
                     context.close();
                 }
             } finally {

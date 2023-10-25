@@ -402,7 +402,7 @@ public class DbSqlSession implements Session {
     // flush
     // ////////////////////////////////////////////////////////////////////
 
-    public void flush() {       //缓存后统一落盘
+    public void flush() {       //hLog 缓存后统一落盘
         determineUpdatedObjects(); // Needs to be done before the removeUnnecessaryOperations, as removeUnnecessaryOperations will remove stuff from the cache
         removeUnnecessaryOperations();
 
